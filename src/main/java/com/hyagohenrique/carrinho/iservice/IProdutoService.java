@@ -9,4 +9,6 @@ public interface IProdutoService {
     Produto salvar(Produto produto);
 
     List<Produto> getLista();
+
+    void remover(Long id);
 }

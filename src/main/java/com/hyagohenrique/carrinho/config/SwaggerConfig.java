@@ -34,14 +34,14 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.hyagohenrique.ferias.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.hyagohenrique.carrinho.controller"))
 				.paths(PathSelectors.any()).build()
 				.apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Ferias API")
-				.description("Ferias API - Documentação de acesso aos endpoints.").version("1.0")
+		return new ApiInfoBuilder().title("Carrinho de Compras API")
+				.description("Carrinho de Compras API - Documentação de acesso aos endpoints.").version("1.0")
 				.build();
 	}
 	
@@ -49,7 +49,7 @@ public class SwaggerConfig {
 	public SecurityConfiguration security() {
 		String token;
 		try {
-			UserDetails userDetails = this.userDetailsService.loadUserByUsername("development@swagger.user");
+			UserDetails userDetails = this.userDetailsService.loadUserByUsername("user@admin.com");
 			token = this.jwtTokenUtil.getToken(userDetails);
 		} catch (Exception e) {
 			token = "";
