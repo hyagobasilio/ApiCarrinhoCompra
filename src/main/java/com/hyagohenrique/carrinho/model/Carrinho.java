@@ -1,9 +1,7 @@
 package com.hyagohenrique.carrinho.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
@@ -34,19 +32,12 @@ public class Carrinho {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrinho")
-    private Set<CarrinhoItem> itens;
+    private List<CarrinhoItem> itens = new ArrayList<>();
 
 	public CarrinhoDTO convertParaDTO() {
         CarrinhoDTO dto =  new CarrinhoDTO(id);
         dto.setItens(this.itens.stream().map(i -> i.converterParaResponseDTO()).collect(Collectors.toList()));
         return dto;
 	}
-
-
-    /* private List<Desconto> descontos;
-    private BigDecimal valorTotal;
-    private Boolean isVenda; */
-
-
     
 }

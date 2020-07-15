@@ -1,6 +1,7 @@
 package com.hyagohenrique.carrinho.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.hyagohenrique.carrinho.exception.NotFoundException;
 import com.hyagohenrique.carrinho.irepository.ICarrinhoItemRespository;
@@ -33,6 +34,19 @@ public class CarrinhoItemService implements ICarrinhoItemService {
 
         Produto produto = this.produtoRepository.findById(carrinhoItem.getProduto().getId())
                         .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
+
+        List<CarrinhoItem> produtosComMesmoId = carrinho.getItens().stream()
+                                        .filter( item -> item.getProduto().getId().equals(produto.getId()) )
+                                        .collect(Collectors.toList());
+        
+        if(!produtosComMesmoId.isEmpty()) {
+            CarrinhoItem itemDoCarrinhoParaAtualizar = produtosComMesmoId.get(0);
+            itemDoCarrinhoParaAtualizar.setQuantidade(itemDoCarrinhoParaAtualizar.getQuantidade().add(carrinhoItem.getQuantidade()));
+            itemDoCarrinhoParaAtualizar.setValorVenda(produto.getPreco());
+            return this.carrinhoItemRepository.save(itemDoCarrinhoParaAtualizar);
+        }
+
+
         
         carrinhoItem.setValorVenda(produto.getPreco());
         carrinhoItem.setProduto(produto);

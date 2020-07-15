@@ -1,5 +1,6 @@
 package com.hyagohenrique.carrinho.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.hyagohenrique.carrinho.irepository.IUsuarioRepository;
@@ -24,5 +25,9 @@ public class UsuarioService implements IUsuarioService {
     public Optional<Usuario> findByEmail(String email) {
         return this.usuarioRepository.findByEmail(email);
     }
-   
+
+    @Override
+    public List<Usuario> listar() {
+        return this.usuarioRepository.findAll();
+    }
 }

@@ -30,7 +30,6 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotEmpty(message = "Informe um nome para a categoria")
     @Column(nullable = false)
     private String nome;
 

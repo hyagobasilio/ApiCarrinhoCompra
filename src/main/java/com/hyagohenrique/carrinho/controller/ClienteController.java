@@ -1,6 +1,7 @@
 package com.hyagohenrique.carrinho.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.hyagohenrique.carrinho.dto.ClienteDTO;
 import com.hyagohenrique.carrinho.iservice.IUsuarioService;
@@ -23,6 +24,16 @@ public class ClienteController {
 
     @Autowired
     private IUsuarioService usuarioService;
+
+    @GetMapping
+    public ResponseEntity<Response<List<ClienteDTO>>> listar() {
+        Response<List<ClienteDTO>> response = new Response<>();
+        List<ClienteDTO> lista = this.usuarioService.listar().stream().map(i -> i.converterParaClienteDTO()).collect(Collectors.toList());
+        response.setData(lista);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     
     @PostMapping
     public ResponseEntity<Response<ClienteDTO>> salvar(@RequestBody ClienteDTO dto, BindingResult result) {

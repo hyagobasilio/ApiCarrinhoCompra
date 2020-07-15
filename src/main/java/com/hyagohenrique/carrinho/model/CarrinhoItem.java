@@ -42,7 +42,13 @@ public class CarrinhoItem {
     }
 
     public CarrinhoItemResponseDTO converterParaResponseDTO() {
-        return new CarrinhoItemResponseDTO(id, produto.getNome(), valorVenda, quantidade, subTotal());
-    }
+        CarrinhoItemResponseDTO dto =  new CarrinhoItemResponseDTO();
+        dto.setIdItem(id);
+        dto.setNomeProduto(produto.getNome());
+        dto.setValor(produto.getPreco());
+        dto.setQuantidade(quantidade);
+        dto.setValorTotalItem(subTotal());
+        return dto;
+    }   
 
 }

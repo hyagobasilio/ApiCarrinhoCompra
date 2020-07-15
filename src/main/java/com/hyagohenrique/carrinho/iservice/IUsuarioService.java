@@ -1,5 +1,6 @@
 package com.hyagohenrique.carrinho.iservice;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.hyagohenrique.carrinho.model.Usuario;
@@ -7,5 +8,7 @@ import com.hyagohenrique.carrinho.model.Usuario;
 public interface IUsuarioService {
     Usuario save(Usuario u);
 	
-	Optional<Usuario> findByEmail(String email);
+    Optional<Usuario> findByEmail(String email);
+    
+    List<Usuario> listar();
 }

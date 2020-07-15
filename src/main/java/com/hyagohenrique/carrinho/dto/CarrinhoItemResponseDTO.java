@@ -16,6 +16,6 @@ public class CarrinhoItemResponseDTO {
     private String nomeProduto;
     private BigDecimal valor;
     private BigDecimal quantidade;
+    private BigDecimal desconto;
     private BigDecimal valorTotalItem;
-
 }
